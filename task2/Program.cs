@@ -35,53 +35,56 @@ namespace HW4._2
             }
         }
 
-        public int Sum(int[] arr)
+        public int Sum()
         {
             int result = 0;
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < MainArray.Length; i++)
             {
-                result += arr[i];
+                result += MainArray[i];
             }
             return result;
         }
 
-        public int[] Inverse(int[] arr)
+        public int[] Inverse()
         {
-            int[] newArr = new int[arr.Length];
-            for (int i = 0; i < arr.Length; i++)
+            int[] newArr = new int[MainArray.Length];
+            for (int i = 0; i < MainArray.Length; i++)
             {
-                newArr[i] = -arr[i];
+                newArr[i] = -MainArray[i];
             }
 
             return newArr;
         }
 
-        public int[] Multi(int[] arr, int mul)
+        public int[] Multi( int mul)
         {
-            int[] newArr = new int[arr.Length];
-            for (int i = 0; i < arr.Length; i++)
+            int[] newArr = new int[MainArray.Length];
+            for (int i = 0; i < MainArray.Length; i++)
             {
-                newArr[i] = mul * arr[i];
+                newArr[i] = mul * MainArray[i];
             }
-
-            return newArr;
+            
+           return newArr;
         }
 
-        public int MaxCounter(int[] arr)
+        public string MaxCounter()
         {
-            int max = arr[0];
-            int result = 0;
-            for (int i = 0; i < arr.Length; i++)
+            string result;
+            int max = MainArray[0];
+            int repits = 0;
+            for (int i = 0; i < MainArray.Length; i++)
             {
-                if (arr[i] > max)
+                if (MainArray[i] > max)
                 {
-                    max = arr[i];
-                    result = 1;
+                    max = MainArray[i];
+                    repits = 1;
                 }
-                else if (arr[i] == max) result++;
+                else if (MainArray[i] == max) repits++;
 
             }
-            return result;
+            result = $"max = {max}, repits {repits} times";
+            return result ;
+            
         }
 
         public string ShowArray()
@@ -94,19 +97,43 @@ namespace HW4._2
             return result;
 
         }
+    }
+    public  struct  Some
+        {
+            public static void Print(int[] arr)
+            {
+                foreach (var item in arr)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+        }
         class Program
         {
             static void Main(string[] args)
             {
                 MyArrays array1 = new MyArrays(20);
                 
-               Console.WriteLine( array1.ShowArray());
+                Console.WriteLine( array1.ShowArray());
+                Console.WriteLine(array1.MaxCounter());
+                Console.WriteLine(array1.Sum());
+
+                Console.WriteLine("##############\n");
+
 
                 MyArrays array2 = new MyArrays(15, 0, 3);
                 Console.WriteLine(array2.ShowArray());
-                
-                Console.ReadLine();
+                 
+                int[] arr1 = array2.Multi(3);
+                Some.Print(arr1);
+
+                Console.WriteLine("##############\n");
+
+                int[] arr2 = array1.Inverse();
+                Some.Print(arr2);
+
+            Console.ReadLine();
             }
         }
-    }
+    
 }
